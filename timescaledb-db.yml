@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: timescaledb
+  namespace: db
 spec:
   ports:
   - port: 5432
@@ -13,6 +14,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: timescaledb
+  namespace: db
 spec:
   template:
     metadata:
@@ -20,7 +22,7 @@ spec:
         app: timescaledb
     spec:
       containers:
-      - image: "timescale/timescaledb"
+      - image: "timescale/timescaledb:1.0.0-pg10"
         name: timescaledb
         env:
         - name: POSTGRES_PASSWORD
